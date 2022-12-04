@@ -1,6 +1,12 @@
 import { Composer } from "grammy";
 
-import { keyboard as welcomeKeyboard } from './../keyboards/welcome.js'
+import {
+	keyboard as welcomeKeyboard,
+	lessons as lessonsKeyboard,
+	days as daysKeyboard,
+} from './../keyboards/welcome.js'
+
+import { Users } from './../helpers/db.js'
 
 export const composer = new Composer();
 
@@ -13,3 +19,12 @@ feature.command('start', async ctx => {
 		reply_markup: welcomeKeyboard
 	})
 });
+
+feature.hears(/📁 Узнать/, async ctx => {
+	const lessons = await (await Users.findOne({ where: { userId: ctx.from.id } })).getLessons();
+	const text = lessons.map(el => `${el.lessonId[0].toUpperCase()+el.lessonId.slice(1)}: ${el.value}`).join('\n');
+	await ctx.reply(`[🧩] Вот ваше Д/З на завтра:\n<code>${text}</code>`);
+});
+
+feature.hears(/📔 Уроки/, async ctx => ctx.reply('[📓] Выберите урок!', { reply_markup: lessonsKeyboard }));
+feature.hears(/📝 Расписание/, async ctx => ctx.reply('[⏳] Выберите день недели!', { reply_markup: daysKeyboard }));

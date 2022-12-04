@@ -10,18 +10,30 @@ import { Users } from './../helpers/db.js'
 export const composer = new Composer();
 
 async function lessons(conversation, ctx) {
-	await ctx.reply(`[⚒] Укажите Д/З для <b>${ctx.match[0].toLowerCase()}</b>.`, { reply_markup: backKeyboard });
+	await ctx.reply(
+		`[⚒] Укажите Д/З для <b>${ctx.match[0].toLowerCase()}</b>.`,
+		{ reply_markup: backKeyboard }
+	);
 	
 	const { msg } = await conversation.waitFor('message:text');
 
 	if (msg.text === '↪️ Назад') {
-		await ctx.reply(`[❌] Отмена указывания Д/З для <b>${ctx.match[0].toLowerCase()}</b>.`, { reply_markup: lessonsKeyboard });
+		await ctx.reply(
+			`[❌] Отмена указывания Д/З для <b>${ctx.match[0].toLowerCase()}</b>.`,
+			{ reply_markup: lessonsKeyboard }
+		);
 		return;
 	}
 
-	await conversation.external(() => Users.findOrCreate)
+	await conversation.external(async () => {
+		(await Users.findUser(ctx.from.id)).setLesson(ctx.match[0].toLowerCase(), msg.text);
+	});
 
-	await ctx.reply('Дз для алгебры это' + msg.text)
+	await ctx.reply(
+		`[🎓] Вы указали Д/З для <b>${ctx.match[0].toLowerCase()}</b>: <code>${msg.text}</code>`,
+		{ reply_markup: lessonsKeyboard }
+	);
+	return;
 };
 
 const feature = composer.chatType('private');

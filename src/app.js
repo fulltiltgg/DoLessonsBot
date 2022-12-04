@@ -8,6 +8,7 @@ import {} from './helpers/db.js'
 
 import { composer as welcomeFeature } from './features/welcome.js'
 import { composer as lessonsFeature } from './features/lessons.js'
+import { composer as scheduleFeature } from './features/schedule.js'
 
 import path from 'path'
 import fs from 'fs'
@@ -38,6 +39,7 @@ async function main() {
 
 	// handlers
 	bot.use(welcomeFeature);
+	bot.use(scheduleFeature);
 	bot.use(lessonsFeature);
 
 	// errors
