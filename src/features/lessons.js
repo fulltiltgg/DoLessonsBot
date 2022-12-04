@@ -12,7 +12,7 @@ async function lessons(conversation, ctx) {
 	
 	const { msg } = await conversation.waitFor('message:text');
 
-	conversation.log(msg)
+	conversation.log(ctx.dbuser)
 
 	if (msg.text === '↪️ Назад') {
 		await ctx.reply(`[❌] Отмена указывания Д/З для <b>${ctx.match[0].toLowerCase()}</b>.`, { reply_markup: lessonsKeyboard });
@@ -26,6 +26,6 @@ const feature = composer.chatType('private');
 
 feature.use(createConversation(lessons));
 
-feature.hears(/Алгебра|Геометрия|ИнформатикаГеография|Биология|Химия|Литература|Нем\.|яз\.Рус\.|яз\.|Общество|История|'Физика'|'ОБЖ'/i, async ctx => {
+feature.hears(/Алгебра|Геометрия|Информатика|География|Биология|Химия|Литература|Нем\. яз\.|Рус\. яз\.|Общество|История|Физика|ОБЖ/i, async ctx => {
 	await ctx.conversation.enter('lessons');
 });

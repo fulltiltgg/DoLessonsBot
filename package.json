@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "dbInit": "node src/dbInit.js"
   },
   "dependencies": {
     "@grammyjs/conversations": "^1.1.0",

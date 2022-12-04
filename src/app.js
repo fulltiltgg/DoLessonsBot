@@ -3,6 +3,9 @@ import { run } from '@grammyjs/runner'
 import { session } from 'grammy'
 import { conversations } from '@grammyjs/conversations'
 import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
+import attachUser from './middlewares/attachUser.js'
+
+import {} from './helpers/db.js'
 
 import { composer as welcomeFeature } from './features/welcome.js'
 import { composer as lessonsFeature } from './features/lessons.js'
@@ -23,12 +26,15 @@ async function main() {
 	console.log(chalk.yellow('[*]'), 'Starting app...');
 
 	// middlewares
+	bot.use(attachUser);
 	bot.use(session({
 		initial() {
 			return {};
 		},
 	}));
 	bot.use(conversations());
+	
+	// markdown
 	bot.use(hydrateReply);	
 	bot.api.config.use(parseMode('HTML'));
 
