@@ -98,4 +98,15 @@ Reflect.defineProperty(Users.prototype, 'getLessons', {
 		return lessons;
 	},
 });
+
+Reflect.defineProperty(Users.prototype, 'getSchedules', {
+	value: async function () {
+		const schedules = await Schedules.findAll({
+			where: { userId: this.userId },
+		});
+
+		return schedules;
+	},
+});
+
 export { Users, Lessons, Schedules };

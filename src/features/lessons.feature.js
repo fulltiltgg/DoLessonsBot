@@ -2,8 +2,8 @@ import { Composer } from "grammy";
 
 import { createConversation } from "@grammyjs/conversations";
 
-import { keyboard as backKeyboard } from './../keyboards/lessons.js'
-import { lessons as lessonsKeyboard } from './../keyboards/welcome.js'
+import { keyboard as backKeyboard } from './../keyboards/back.keyboard.js'
+import { keyboard as lessonsKeyboard } from './../keyboards/lessons.keyboard.js'
 
 import { Users } from './../helpers/db.js'
 

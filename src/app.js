@@ -6,9 +6,11 @@ import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
 
 import {} from './helpers/db.js'
 
-import { composer as welcomeFeature } from './features/welcome.js'
-import { composer as lessonsFeature } from './features/lessons.js'
-import { composer as scheduleFeature } from './features/schedule.js'
+import { composer as welcomeFeature } from './features/welcome.feature.js'
+import { composer as lessonsFeature } from './features/lessons.feature.js'
+import { composer as scheduleFeature } from './features/schedule.feature.js'
+import { composer as profileFeature } from './features/profile.feature.js'
+
 
 import path from 'path'
 import fs from 'fs'
@@ -41,6 +43,7 @@ async function main() {
 	bot.use(welcomeFeature);
 	bot.use(scheduleFeature);
 	bot.use(lessonsFeature);
+	bot.use(profileFeature);
 
 	// errors
 	bot.catch(err => {

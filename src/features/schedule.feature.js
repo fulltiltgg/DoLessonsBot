@@ -2,8 +2,8 @@ import { Composer } from "grammy";
 
 import { createConversation } from "@grammyjs/conversations";
 
-import { keyboard as backKeyboard } from './../keyboards/lessons.js'
-import { days as daysKeyboard } from './../keyboards/welcome.js'
+import { keyboard as backKeyboard } from './../keyboards/back.keyboard.js'
+import { keyboard as daysKeyboard } from './../keyboards/days.keyboard.js'
 
 import { Users } from './../helpers/db.js'
 
@@ -26,7 +26,7 @@ async function schedule(conversation, ctx) {
 	}
 
 	await conversation.external(async () => {
-		(await Users.findUser(ctx.from.id)).setSchedule(ctx.match[0].toLowerCase(), msg.text.replace(/\n/gi, ';'));
+		(await Users.findUser(ctx.from.id)).setSchedule(ctx.match[0].toLowerCase(), msg.text.replace(/\n/gi, ';').toLowerCase());
 	});
 
 	await ctx.reply(
