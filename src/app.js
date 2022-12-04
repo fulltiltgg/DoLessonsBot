@@ -3,7 +3,6 @@ import { run } from '@grammyjs/runner'
 import { session } from 'grammy'
 import { conversations } from '@grammyjs/conversations'
 import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
-import attachUser from './middlewares/attachUser.js'
 
 import {} from './helpers/db.js'
 
@@ -26,7 +25,6 @@ async function main() {
 	console.log(chalk.yellow('[*]'), 'Starting app...');
 
 	// middlewares
-	bot.use(attachUser);
 	bot.use(session({
 		initial() {
 			return {};
