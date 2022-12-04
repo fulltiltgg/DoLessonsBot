@@ -1,0 +1,25 @@
+{
+  "name": "DoLessons",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "author": "nightyflyy <mamont@internet.ru>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "@grammyjs/conversations": "^1.1.0",
+    "@grammyjs/menu": "^1.1.2",
+    "@grammyjs/parse-mode": "^1.5.0",
+    "@grammyjs/runner": "^1.0.4",
+    "@grammyjs/types": "^2.10.2",
+    "chalk": "^5.1.2",
+    "dotenv": "^16.0.3",
+    "envalid": "^7.3.1",
+    "grammy": "^1.12.0",
+    "sequelize": "^6.26.0",
+    "sqlite3": "^5.1.2"
+  },
+  "packageManager": "yarn@3.3.0"
+}

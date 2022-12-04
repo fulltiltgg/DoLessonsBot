@@ -1,0 +1,7 @@
+.yarrc.yml
+.env
+database.sqlite
+.yarn
+.yarnrc.yml
+.pnp.cjs
+.pnp.loader.mjs
