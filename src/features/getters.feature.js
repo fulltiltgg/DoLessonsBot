@@ -15,7 +15,7 @@ function tableSchedule(schedules) {
 		text += '|' + schedule.dayId + ' '.repeat(delta-schedule.dayId.length-2) + '|' + '\n';
 		text += '├' + '─'.repeat(delta-2) + '┤' + '\n';
 
-		for (let lesson of schedule.value.split(';')) {
+		for (let lesson of schedule.value?.split(';')||[]) {
 			text += '│' + lesson + ' '.repeat(delta-lesson.length-2) + '|' + '\n';
 		}
 
@@ -25,8 +25,14 @@ function tableSchedule(schedules) {
 	return text+'</code>';
 }
 
-feature.command('schedule', async ctx => {
+feature.hears(/📚 Всё расписание|\/getschedule/, async ctx => {
 	const schedules = await (await Users.findOne({ where: { userId: ctx.from.id } })).getSchedules();
 
 	ctx.reply(tableSchedule(schedules));
+});
+
+feature.hears(/📁 Д\/З|\/getlessons/, async ctx => {
+	const lessons = await (await Users.findOne({ where: { userId: ctx.from.id } })).getLessons();
+	const text = lessons.map(el => `${el.lessonId[0].toUpperCase()+el.lessonId.slice(1)}: ${el.value}`).join('\n');
+	await ctx.reply(`[🧩] Вот ваше Д/З на завтра:\n<code>${text}</code>`);
 });

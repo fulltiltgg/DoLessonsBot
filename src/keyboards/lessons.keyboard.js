@@ -7,5 +7,5 @@ keyboard
 	.text('География').text('Биология').text('Химия').row()
 	.text('Литература').text('Нем. яз.').text('Рус. яз.').row()
 	.text('Общество').text('История').text('Физика').row()
-	.text('📁 Узнать').text('ОБЖ').text('📝 Расписание').row()
+	.text('📁 Д/З').text('ОБЖ').text('🎮 Меню').row()
 	.resized();
