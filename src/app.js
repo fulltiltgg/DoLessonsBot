@@ -52,7 +52,7 @@ async function main() {
 
 	// Start bot
 	await bot.init();
-	run(bot);
+	run(bot, undefined, undefined, { silent: true });
 
 	console.log(chalk.green('[!]'), `Bot @${bot.botInfo.username} is up and running!`);
 }

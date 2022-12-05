@@ -71,7 +71,7 @@ Reflect.defineProperty(Users.prototype, 'setSchedule', {
 function normalizeDate(day) {
 	const days = [ 'воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота' ];
 
-	const tomorrowDay = day !== 0 && day !== 6 ? days[day] : days[1];
+	const tomorrowDay = day !== 0 && day !== 6 ? days[day+1] : days[1];
 
 	return tomorrowDay;
 }
